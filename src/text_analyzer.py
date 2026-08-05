@@ -98,6 +98,11 @@ def split_into_sentences(text: str) -> list[str]:
     if not text or not text.strip():
         return []
 
+    # Normalize whitespace: replace single newlines with spaces, keep paragraph breaks
+    # This handles sentences that span multiple lines in markdown
+    text = re.sub(r'\n\n+', '\n\n', text)  # Normalize multiple newlines to double newline
+    text = re.sub(r'(?<!\n)\n(?!\n)', ' ', text)  # Single newlines become spaces
+
     # Replace common abbreviations to avoid false sentence breaks
     text = re.sub(r'\bDr\.', 'Dr', text)
     text = re.sub(r'\bMr\.', 'Mr', text)
@@ -111,9 +116,19 @@ def split_into_sentences(text: str) -> list[str]:
     sentences = re.split(r'[.!?]+', text)
 
     # Filter out empty sentences and strip whitespace
-    sentences = [s.strip() for s in sentences if s.strip()]
+    # Also filter out single-word items (likely headers or fragments)
+    filtered_sentences = []
+    for s in sentences:
+        s = s.strip()
+        if not s:
+            continue
+        # Skip single-word items (headers/fragments)
+        words = s.split()
+        if len(words) < 2:
+            continue
+        filtered_sentences.append(s)
 
-    return sentences
+    return filtered_sentences
 
 
 def extract_words(text: str) -> list[str]:
