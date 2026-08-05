@@ -4,7 +4,8 @@ A Flesch-Kincaid Grade Level calculator for markdown documents. Analyzes text re
 
 ## Features
 
-- **User-friendly GUI** with file selector and visual results
+- **Claude skill integration** - Analyze readability directly through Claude CLI with AI-powered suggestions
+- **User-friendly GUI** with file selector and visual results (perfect for non-technical users)
 - Calculates Flesch-Kincaid Grade Level for markdown documents
 - Converts markdown to plain text (removes code blocks, links, images)
 - Identifies sentences with grade level above 12
@@ -66,6 +67,46 @@ Complex sentences (grade level > 12):
 - Another unnecessarily verbose sentence demonstrating excessive complexity.
 ```
 
+### Claude Skill (AI-Powered Analysis)
+
+For Claude CLI users, analyze readability with AI-powered suggestions:
+
+```bash
+# In Claude CLI, simply ask:
+"Analyze the readability of document.md"
+```
+
+The Claude skill provides:
+- Automated readability analysis
+- AI-generated suggestions for simplifying complex sentences
+- Specific rewrites in plain language
+- Contextual recommendations based on your target audience
+- Interactive revision workflow
+
+**Example interaction:**
+```
+You: "Analyze test_complex.md and help me simplify it"
+
+Claude:
+  Analyzing test_complex.md...
+
+  Grade Level: 24.4 (Graduate school level)
+
+  Complex Sentences:
+  1. "However, the aforementioned methodological paradigm necessitates..."
+     → Suggested: "However, this approach requires collaboration between teams."
+
+  2. "Furthermore, the implementation of sophisticated algorithmic..."
+     → Suggested: "Additionally, these optimizations need powerful systems."
+
+  Recommendations:
+  - Target: 12.0 or below for general audiences
+  - Simplify the 2 sentences above
+  - Would you like me to rewrite the entire section?
+```
+
+**Setup**: The skill is located in `.claude/skills/readability/`. See `.claude/skills/readability/README.md` for details.
+
 ## Flesch-Kincaid Formula
 
 The tool uses the Flesch-Kincaid Grade Level formula:
@@ -95,6 +136,12 @@ python3 -m pytest tests/ -v
 ```
 readability-calculator/
 ├── launch_gui.py              # GUI launcher (double-click to run)
+├── .claude/
+│   └── skills/
+│       └── readability/       # Claude skill for AI-powered analysis
+│           ├── skill.yaml     # Skill configuration
+│           ├── README.md      # Skill documentation
+│           └── examples.md    # Usage examples
 ├── src/
 │   ├── __init__.py
 │   ├── gui.py                 # GUI interface with file selector
