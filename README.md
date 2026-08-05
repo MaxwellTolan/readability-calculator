@@ -4,7 +4,7 @@ A Flesch-Kincaid Grade Level calculator for markdown documents. Analyzes text re
 
 ## Features
 
-- **User-friendly GUI** with file selector and visual results (perfect for non-technical users)
+- **User-friendly GUI** with file selector and visual results
 - Calculates Flesch-Kincaid Grade Level for markdown documents
 - Converts markdown to plain text (removes code blocks, links, images)
 - Identifies sentences with grade level above 12
@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-### GUI Interface (Recommended for Non-Technical Users)
+### GUI Interface
 
 Launch the graphical interface with a file selector and visual results display:
 
